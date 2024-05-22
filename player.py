@@ -2,10 +2,11 @@ import random
 
 
 class CreateChar:
-	
+# <-- INITIALIZATION -->
 	def init_character(self):
 		# Get character name from user
-		self.name()
+		self.name = input("What is your name?\n>>> ")
+		print("Nice to meet you {self.char_name}")
 		# Get character class
 		temp_domain = ''
 		while True:
@@ -28,27 +29,23 @@ class CreateChar:
 		self.strength(self.domain)
 		self.stamina(self.domain)
 		# return all values to main.py main func
-		return self.name, self.domain, self.hitpoints, self.strength, self.stamina
+		return self.name, self.domain, self.hitpoints, self.max_hitpoints,  self.strength, self.stamina, self.max_stamina
 
-
-	def name(self):
-		self.name = input("What is your name?\n>>> ")
-		print("Nice to meet you {self.char_name}")
-		return self.name
-	
-	
+# <-- PLAYER STATS  -->
 	def hitpoints(self, domain):
 		self.domain = domain
-		
 		if self.domain == 'Rogue':
 			self.hitpoints = random.randrange(5, 20)
-			return self.hitpoints
+			self.max_hitpoints = self.hitpoints
+			return self.hitpoints, self.max_hitpoints
 		elif self.domain == 'Warrior':
 			self.hitpoints = random.randrange(5, 18)
-			return self.hitpoints
+			self.max_hitpoints = self.hitpoints
+			return self.hitpoints, self.max_hitpoints
 		elif self.domain == 'Fighter':
 			self.hitpoints = random.randrange(5, 16)
-			return self.hitpoints
+			self.max_hitpoints = self.hitpoints
+			return self.hitpoints, self.max_hitpoints
 		else:
 			print("Error in player class, char_health func")
 			exit(0)
@@ -56,7 +53,6 @@ class CreateChar:
 
 	def strength(self, domain):
 		self.domain = domain
-		
 		if self.domain == "Rogue":
 			self.strength = random.randrange(2, 10)
 			return self.strength
@@ -72,20 +68,35 @@ class CreateChar:
 	
 	def stamina(self, domain):
 		self.domain = domain
-		
 		if self.domain == "Rogue":
 			self.stamina = 110
-			return self.stamina
+			self.max_stamina = self.stamina
+			return self.stamina, self.max_stamina
 		if self.domain == "Warrior":
 			self.stamina = 90
-			return self.stamina
+			self.max_stamina = self.stamina
+			return self.stamina, self.max_stamina
 		if self.domain == "Fighter":
 			self.stamina = 100
-			return self.stamina
+			self.max_stamina = self.stamina
+			return self.stamina, self.max_stamina
 		else:
 			print("Error in player class, char_strength func")
 			exit(0)
 	
+# <-- REGENERATION FUNCTIONS -->
+	def regenerate_hitpoints(self, hitpoints):
+		self.hitpoints = hitpoints
+		self.max_hitpoints = self.max_hitpoints
+		if self.hitpoints >= self.max_hitpoints:
+			return self.hitpoints
+		elif self.hitpoints < self.max_hitpoints:
+			if self.hitpoints <= 0:
+				self.death(self.name)
+			self.hitpoints = random.randrange(2,6)
+			if self.hitpoints >= self.max_hitpoints:
+				self.hitpoints = self.max_hitpoints
+		return self.hitpoints
 	
 	def regenerate_stamina(self, stamina):
 		self.stamina = stamina
@@ -102,6 +113,7 @@ class CreateChar:
 			exit(0)
 
 
+# <-- DEATH FUNCTIONS -->
 	def death(self, player_character):
 		print(f"You have died, your beloved character {self.name} has met their ultimate fate...")
 		print("Kiss {} goodbye... FOREVER!")
