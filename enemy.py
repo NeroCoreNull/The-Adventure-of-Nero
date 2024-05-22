@@ -39,3 +39,17 @@ class CreateEnemy:
 		# no stamina change based on race yet
 		self.stamina = random.randrange(40, 80, 5)
 		return self.stamina
+		
+	def regenerate_stamina(self, stamina):
+		self.stamina = stamina
+		max_stamina = self.stamina
+		if self.stamina >= max_stamina:
+			return self.stamina
+		elif self.stamina < max_stamina:
+			self.stamina += 2.5
+			if self.stamina >= max_stamina:
+				self.stamina = max_stamina
+			return self.stamina
+		else:
+			print("Error instide player.py | regenerate_stamina func")
+			exit(0)

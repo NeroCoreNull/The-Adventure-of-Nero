@@ -85,6 +85,21 @@ class CreateChar:
 		else:
 			print("Error in player class, char_strength func")
 			exit(0)
+	
+	
+	def regenerate_stamina(self, stamina):
+		self.stamina = stamina
+		max_stamina = self.stamina
+		if self.stamina >= max_stamina:
+			return self.stamina
+		elif self.stamina < max_stamina:
+			self.stamina += 5
+			if self.stamina >= max_stamina:
+				self.stamina = max_stamina
+			return self.stamina
+		else:
+			print("Error instide player.py | regenerate_stamina func")
+			exit(0)
 
 
 	def death(self, player_character):
