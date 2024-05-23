@@ -25,17 +25,17 @@ class CreateChar:
 				temp_domain = ''
 				pass
 		# Get initial stats
-		self.hitpoints(self.domain)
-		self.strength(self.domain)
-		self.stamina(self.domain)
+		self.hp(self.domain)
+		self.str(self.domain)
+		self.endurance(self.domain)
 		# return all values to main.py main func
 		return self.name, self.domain, self.hitpoints, self.max_hitpoints,  self.strength, self.stamina, self.max_stamina
 
 # <-- PLAYER STATS  -->
-	def hitpoints(self, domain):
+	def hp(self, domain):
 		self.domain = domain
 		if self.domain == 'Rogue':
-			self.hitpoints = random.randrange(5, 20)
+			self.hitpoints = random.randrange(5, 18)
 			self.max_hitpoints = self.hitpoints
 			return self.hitpoints, self.max_hitpoints
 		elif self.domain == 'Warrior':
@@ -51,7 +51,7 @@ class CreateChar:
 			exit(0)
 
 
-	def strength(self, domain):
+	def str(self, domain):
 		self.domain = domain
 		if self.domain == "Rogue":
 			self.strength = random.randrange(2, 10)
@@ -66,7 +66,7 @@ class CreateChar:
 			print("Error in player class, char_strength func")
 			exit(0)
 	
-	def stamina(self, domain):
+	def endurance(self, domain):
 		self.domain = domain
 		if self.domain == "Rogue":
 			self.stamina = 110

@@ -1,7 +1,6 @@
 import random
 
 
-
 def arena(player, enemy):
 	player = player
 	enemy = enemy
@@ -74,7 +73,9 @@ def arena(player, enemy):
 			player.death(player)
 		elif e_hp <= e_max_hp % e_max_hp:
 			print("You have slain the beast! You win!!!")
-			exit(0)	
+			exit(0)
+		elif p_hp > p_max_hp % p_max_hp and e_hp > e_max_hp % e_max_hp:
+			pass
 		else:
 			print("Error inside arena.py | while loop, 2nd if statement checking death")
 			exit(0)
