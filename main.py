@@ -6,6 +6,7 @@ import arena
 
 
 def main():
+	
 	player = CreateChar()
 	player.init_character()
 	
@@ -17,5 +18,6 @@ def main():
 	
 	arena.arena(player, enemy)
 
+# <-- call main function -->
 if __name__ == "__main__":
 	main()
